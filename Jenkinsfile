@@ -9,23 +9,22 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                checkout scmGit(branches: [[name: '*/integrate-docker']],
+                checkout scmGit(branches: [[name: '*/main']],
                 userRemoteConfigs: [[credentialsId: 'fc119a1e-8277-4052-b3ea-73c9128d6797', 
-                url: 'https://github.com/ncrekai/Lab2SpringBMaven.git']])
+                url: 'https://github.com/ncrekai/COMP367Lab3.git']])
             }
         }
-        stage("Compile"){
-            steps{
-                sh "mvn clean compile"
-            }
-        }
+        // stage("Compile"){
+        //     steps{
+        //         sh "mvn clean compile"
+        //     }
+        // }
         stage('Build') {
             steps {
-               sh " mvn clean package"
+            //    sh " mvn clean package"
                echo "I live here: ${env.WORKSPACE}"
                 // archiveArtifacts artifacts: '/target/*.jar', fingerprint: true
-                // archiveArtifacts artifacts: '../../../../', fingerprint: true
-
+                // archiveArtifacts artifacts: '../../../../../Users/ncrek/Documents/comp367lab3/target/*.jar', fingerprint: true
             }
         }
     }

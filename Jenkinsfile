@@ -21,10 +21,10 @@ pipeline {
         }
         stage('Build') {
             steps {
-               sh " mvn clean package"
-            //    echo "I live here: ${env.WORKSPACE}"
+            //    sh " mvn clean package"
+               echo "I live here: ${env.WORKSPACE}"
                 // archiveArtifacts artifacts: '/target/*.jar', fingerprint: true
-                archiveArtifacts artifacts: '../RekaiLab3.jar', fingerprint: true
+                // archiveArtifacts artifacts: '../RekaiLab3.jar', fingerprint: true
             }
         }
     }

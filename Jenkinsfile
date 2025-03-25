@@ -14,17 +14,17 @@ pipeline {
                 url: 'https://github.com/ncrekai/COMP367Lab3.git']])
             }
         }
-        // stage("Compile"){
-        //     steps{
-        //         sh "mvn clean compile"
-        //     }
-        // }
+        stage("Compile"){
+            steps{
+                sh "mvn clean compile"
+            }
+        }
         stage('Build') {
             steps {
-            //    sh " mvn clean package"
-               echo "I live here: ${env.WORKSPACE}"
+               sh " mvn clean package"
+            //    echo "I live here: ${env.WORKSPACE}"
                 // archiveArtifacts artifacts: '/target/*.jar', fingerprint: true
-                // archiveArtifacts artifacts: '../../../../../Users/ncrek/Documents/comp367lab3/target/*.jar', fingerprint: true
+                archiveArtifacts artifacts: '../RekaiLab3.jar', fingerprint: true
             }
         }
     }

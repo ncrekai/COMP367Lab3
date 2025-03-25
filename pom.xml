@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.rekai</groupId>
-	<artifactId>comp367lab2</artifactId>
+	<artifactId>comp367lab3</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>comp367lab2</name>
 	<description>Demo project for Spring Boot</description>

@@ -4,46 +4,50 @@ pipeline {
     tools {
         maven "Maven3.9"
     }
+    environment {
+        DOCKERHUB_PWD=credentials("NatalieDocker")
+    }
 
     stages {
-        // stage('Checkout') {
-        //     steps {
-        //         checkout scmGit(branches: [[name: '*/main']],
-        //         userRemoteConfigs: [[credentialsId: 'fc119a1e-8277-4052-b3ea-73c9128d6797', 
-        //         url: 'https://github.com/ncrekai/COMP367Lab3.git']])
-        //     }
-        // }
+        stage("Checkout") {
+            steps {
+                git branch: "main", url: "https://github.com/ncrekai/COMP367Lab3.git"
+            }
+        }
+        
+        stage("Build Maven Project") {
+            steps {
+                sh "mvn clean install"
+            }
+        }
+
+        stage("Docker Build") {
+            steps {
+                script {
+                    sh "docker build -t Lab3MavenDockerBuild:latest"
+                }
+            }
+        }
+
+        stage("Docker Push") {
+            steps {
+                script {
+                    sh "docker login -u nrekai -p ${DOCKERHUB_PWD}"
+                    sh "docker push Lab3MavenDockerBuild:latest"
+                }
+            }
+        }
+        
+
         // stage("Compile"){
         //     steps{
         //         sh "mvn clean compile"
         //     }
         // }
-        // stage('Build') {
+        // stage("Build") {
         //     steps {
-        //     //    sh " mvn clean package"
-        //        echo "I live here: ${env.WORKSPACE}"
-        //         // archiveArtifacts artifacts: '/target/*.jar', fingerprint: true
-        //         // archiveArtifacts artifacts: '../RekaiLab3.jar', fingerprint: true
+        //        sh "mvn clean package"
         //     }
         // }
-
-        stage('Checkout') {
-            steps {
-                checkout scmGit(branches: [[name: '*/main']],
-                userRemoteConfigs: [[credentialsId: 'fc119a1e-8277-4052-b3ea-73c9128d6797', 
-                url: 'https://github.com/ncrekai/COMP367Lab3.git']])
-            }
-        }
-        stage("Compile"){
-            steps{
-                sh "mvn clean compile"
-            }
-        }
-        stage('Build') {
-            steps {
-               sh "mvn clean package"
-            //    archiveArtifacts artifacts: '../RekaiLab3.jar', fingerprint: true
-            }
-        }
     }
 }

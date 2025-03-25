@@ -24,7 +24,7 @@ pipeline {
         stage("Docker Build") {
             steps {
                 script {
-                    sh "docker build -t Natalie/Lab3MavenDockerBuild:latest ."
+                    sh "docker build -t natalie/lab3mavendockerbuild:latest ."
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                     sh "docker login -u nrekai -p ${DOCKERHUB_PWD}"
-                    sh "docker push Natalie/Lab3MavenDockerBuild:latest"
+                    sh "docker push natalie/lab3mavendockerbuild:latest"
                 }
             }
         }

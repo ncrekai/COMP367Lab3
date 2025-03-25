@@ -21,7 +21,7 @@ pipeline {
         stage("Docker Build") {
             steps {
                 script {
-                    sh "docker build -t natalie/lab3mavendockerbuild:latest ."
+                    sh "docker build -t lab3mavendockerbuild:latest ."
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'NatalieDocker', passwordVariable: 'dockerpw', usernameVariable: 'dockeruser')]) {
                     sh "docker login -u ${env.dockeruser} -p ${env.dockerpw}"
-                    sh 'docker push natalie/lab3mavendockerbuild:latest'
+                    sh "docker push lab3mavendockerbuild:latest"
                 }
             }
         }

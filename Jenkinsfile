@@ -42,7 +42,7 @@ pipeline {
         stage('Build') {
             steps {
                sh "mvn clean package"
-               archiveArtifacts artifacts: '../RekaiLab3.jar', fingerprint: true
+            //    archiveArtifacts artifacts: '../RekaiLab3.jar', fingerprint: true
             }
         }
     }

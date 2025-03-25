@@ -4,9 +4,6 @@ pipeline {
     tools {
         maven "Maven3.9"
     }
-    environment {
-        DOCKERHUB_PWD=credentials("NatalieDocker")
-    }
 
     stages {
         stage("Checkout") {
@@ -31,23 +28,11 @@ pipeline {
 
         stage("Docker Push") {
             steps {
-                script {
-                    sh "docker login -u nrekai -p ${DOCKERHUB_PWD}"
-                    sh "docker push natalie/lab3mavendockerbuild:latest"
+                withCredentials([usernamePassword(credentialsId: 'NatalieDocker', passwordVariable: 'dockerpw', usernameVariable: 'dockeruser')]) {
+                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                    sh 'docker push shanem/spring-petclinic:latest'
                 }
             }
         }
-        
-
-        // stage("Compile"){
-        //     steps{
-        //         sh "mvn clean compile"
-        //     }
-        // }
-        // stage("Build") {
-        //     steps {
-        //        sh "mvn clean package"
-        //     }
-        // }
     }
 }

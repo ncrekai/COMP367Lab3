@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                     sh "docker login -u nrekai -p ${DOCKERHUB_PWD}"
-                    sh "docker push Lab3MavenDockerBuild:latest"
+                    sh "docker push Natalie/Lab3MavenDockerBuild:latest"
                 }
             }
         }

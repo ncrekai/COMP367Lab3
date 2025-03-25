@@ -24,7 +24,7 @@ pipeline {
         stage("Docker Build") {
             steps {
                 script {
-                    sh "docker build -t Lab3MavenDockerBuild:latest"
+                    sh "docker build -t Natalie/Lab3MavenDockerBuild:latest ."
                 }
             }
         }

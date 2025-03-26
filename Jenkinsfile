@@ -21,7 +21,7 @@ pipeline {
         stage("Docker Build") {
             steps {
                 script {
-                    sh "docker build -t nrekai/natalie_repo/lab3mavendockerbuild:latest ."
+                    sh "docker build -t nrekai/natalie_repo ."
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'NatalieDocker2', passwordVariable: 'dockerpw', usernameVariable: 'dockeruser')]) {
                     sh "docker login -u ${env.dockeruser} -p ${env.dockerpw}"
-                    sh "docker push nrekai/natalie_repo/lab3mavendockerbuild:latest"
+                    sh "docker push nrekai/natalie_repo"
                 }
             }
         }
